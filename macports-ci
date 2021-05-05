@@ -107,6 +107,10 @@ elif test "$OSX_VERSION" == 10.14 ; then
   OSX_NAME=Mojave
 elif test "$OSX_VERSION" == 10.15 ; then
   OSX_NAME=Catalina
+elif test "$OSX_VERSION" == 11.3 ; then
+  MACPORTS_VERSION=${MACPORTS_VERSION}_1
+  OSX_VERSION=11
+  OSX_NAME=BigSur
 else
   echo "macports-ci: Unknown OSX version $OSX_VERSION"
   exit 1
@@ -115,6 +119,7 @@ fi
 echo "macports-ci: OSX version $OSX_VERSION $OSX_NAME"
 
 MACPORTS_PKG=MacPorts-${MACPORTS_VERSION}-${OSX_VERSION}-${OSX_NAME}.pkg
+MACPORTS_VERSION=2.6.4
 
 # this is a workaround needed because binary installer MacPorts-2.6.3-10.12-Sierra.pkg is broken
 if [ "$SOURCE" != yes ] && [ "$MACPORTS_PKG" = "MacPorts-2.6.3-10.12-Sierra.pkg" ] ; then
