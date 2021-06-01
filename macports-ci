@@ -36,7 +36,7 @@ export MACPORTS_CI_SOURCEME="$(mktemp)"
 # 2. as source ./macports-ci
 # as of now, choice 2 only changes the env var COLUMNS.
 
-MACPORTS_VERSION=2.6.4
+MACPORTS_VERSION=2.7.1
 MACPORTS_PREFIX=/opt/local
 MACPORTS_SYNC=tarball
 
@@ -107,8 +107,7 @@ elif test "$OSX_VERSION" == 10.14 ; then
   OSX_NAME=Mojave
 elif test "$OSX_VERSION" == 10.15 ; then
   OSX_NAME=Catalina
-elif test "$OSX_VERSION" == 11.3 ; then
-  MACPORTS_VERSION=${MACPORTS_VERSION}_1
+elif test "$(echo $OSX_VERSION | cut -c1-2)" == 11 ; then
   OSX_VERSION=11
   OSX_NAME=BigSur
 else
@@ -119,7 +118,6 @@ fi
 echo "macports-ci: OSX version $OSX_VERSION $OSX_NAME"
 
 MACPORTS_PKG=MacPorts-${MACPORTS_VERSION}-${OSX_VERSION}-${OSX_NAME}.pkg
-MACPORTS_VERSION=2.6.4
 
 # this is a workaround needed because binary installer MacPorts-2.6.3-10.12-Sierra.pkg is broken
 if [ "$SOURCE" != yes ] && [ "$MACPORTS_PKG" = "MacPorts-2.6.3-10.12-Sierra.pkg" ] ; then
