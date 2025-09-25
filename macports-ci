@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Copyright (c) 2017-2021 Giovanni Bussi
+# Copyright (c) 2017-2025 Giovanni Bussi
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,16 @@ export MACPORTS_CI_SOURCEME="$(mktemp)"
 # 2. as source ./macports-ci
 # as of now, choice 2 only changes the env var COLUMNS.
 
-MACPORTS_VERSION=2.10.2
+curl -Ls \
+    -H "Accept: application/vnd.github+json" \
+    -H "X-GitHub-Api-Version: 2022-11-28" \
+    https://api.github.com/repos/macports/macports-base/releases/latest
+
+MACPORTS_VERSION=$(curl -Ls \
+    -H "Accept: application/vnd.github+json" \
+    -H "X-GitHub-Api-Version: 2022-11-28" \
+    https://api.github.com/repos/macports/macports-base/releases/latest | \
+    python -c "import json; import sys; print(json.load(sys.stdin)['tag_name'][1:])")
 MACPORTS_PREFIX=/opt/local
 MACPORTS_SYNC=tarball
 
