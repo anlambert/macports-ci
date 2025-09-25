@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Copyright (c) 2017-2021 Giovanni Bussi
+# Copyright (c) 2017-2025 Giovanni Bussi
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,18 @@ export MACPORTS_CI_SOURCEME="$(mktemp)"
 # 2. as source ./macports-ci
 # as of now, choice 2 only changes the env var COLUMNS.
 
-MACPORTS_VERSION=2.10.2
+RELEASE_URL=https://distfiles.macports.org/MacPorts/RELEASE_URL
+# get latest MacPorts version by cutting "https://github.com/macports/macports-base/releases/tag/v"
+# prefix in HTTP response text
+MACPORTS_VERSION=$(curl $RELEASE_URL | cut -c57-)
+if [[ ! $MACPORTS_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+then
+  MACPORTS_VERSION=2.11.5
+  echo Error when fetching latest MacPorts version, falling back to $MACPORTS_VERSION.
+else
+  echo Latest MacPorts version is $MACPORTS_VERSION.
+fi
+
 MACPORTS_PREFIX=/opt/local
 MACPORTS_SYNC=tarball
 
