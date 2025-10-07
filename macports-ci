@@ -153,6 +153,7 @@ if [ "$SOURCE" != yes ] && [ "$MACPORTS_PKG" = "MacPorts-2.6.3-10.12-Sierra.pkg"
   MACPORTS_PKG=MacPorts-${MACPORTS_VERSION}-${OSX_VERSION}-${OSX_NAME}.pkg
 fi
 
+
 URL="https://distfiles.macports.org/MacPorts"
 URL="https://github.com/macports/macports-base/releases/download/v$MACPORTS_VERSION/"
 
@@ -165,7 +166,7 @@ if test "$SOURCE" = yes ; then
   cd MacPorts-${MACPORTS_VERSION}
 # install
   ./configure --prefix="$MACPORTS_PREFIX" --with-applications-dir="$MACPORTS_PREFIX/Applications" >/dev/null &&
-    sudo make install >/dev/null
+    make >/dev/null && sudo make install >/dev/null
 else
 
 # download installer:
