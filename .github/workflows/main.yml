@@ -20,6 +20,7 @@ jobs:
         config:
           - os: macos-14
           - os: macos-15
+          - os: macos-15-intel
     runs-on: ${{ matrix.config.os }}
     steps:
     - uses: actions/checkout@v4
@@ -40,6 +41,7 @@ jobs:
         config:
           - os: macos-14
           - os: macos-15
+          - os: macos-15-intel
     runs-on: ${{ matrix.config.os }}
     steps:
     - uses: actions/checkout@v4
@@ -60,6 +62,7 @@ jobs:
         config:
           - os: macos-14
           - os: macos-15
+          - os: macos-15-intel
     runs-on: ${{ matrix.config.os }}
     steps:
     - uses: actions/checkout@v4
